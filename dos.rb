@@ -108,11 +108,12 @@ def user_exist?(user)
 end
 
 def login(user, pass)
-    $pw = File.open("user/#{user}", "r")
-    puts $pw.readline
-    puts pass
-    return true if $pw.readline == pass
+    value = String.new
+    pw = File.open("user/#{user}", "r")
+    value == true if pw.read == pass
+    return true
 end
+
 
 def loggedin(user)
     puts "Opening #{user}.rb"
