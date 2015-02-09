@@ -1,0 +1,2 @@
+yes
+#remove everything from this file and replace it with 'no', if you do not want help with your jeidos
