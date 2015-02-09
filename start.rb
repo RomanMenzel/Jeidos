@@ -2,6 +2,12 @@ if Dir.exists?('user') then
     Dir.mkdir('user')
 end
 
+entrs = Dir.entries(Dir.pwd)
+if entrs.include? ("help.txt") == false then
+    helpFile = File.new("help.txt", "w+")
+    helpFile.puts("yes")
+end
+
 def detect_users(folder)
     @accepted = [".user"]
     @user = ""
