@@ -83,3 +83,4 @@ else
     puts "User does not exist"
     exit
 end
+end
