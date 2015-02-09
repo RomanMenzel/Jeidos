@@ -1,6 +1,8 @@
 load 'programmes/binary.rb'
-cmd = "" 
-puts "Hello and welcome to JeiDos. Start by typing in 'help'"
+require 'net/http'
+#require 'paint'
+cmd = String.new
+puts "Hello and welcome to JeiDos. Start by typing in 'help"
 
 while cmd != "exit"
 
@@ -10,14 +12,14 @@ cmd = gets.chomp!
 # Variables and Methods
 @time = Time.now
 
-@version = "Alpha 0.1\nLast Updated: 05.02.2015"
+@version = "Alpha 0.2\nLast Updated: 09.02.2015"
 
-@commandList = "ls, exit, rm, open, download, time, calc, version, convert, login, crt-usr ?:, :"
+@commandList = "ls, exit, open, download, time, calc, version, convert, login, password, crt-usr ?:, :"
 @help = {'ls' => 'Lists all the files and folder in your current directory',
                  'exit' => 'exits the programme',
                  'rm' => 'Can delete files. Type in rm and you will get a "?:". It is asking you for the file to delete',
                  'open' => 'Can open files. Type in open and you will get a "?:". It is asking you for the file to open',
-                 'download' => 'Can be used to download files from a webserver (works only on Linux)',
+                 'download' => 'Can be used to download files from a webserver (works only on Linux). New: Added Ruby-Downloader, downloading now works on other platforms too',
                  'time' => 'Will show the current time for UTC+1',
                  'calc' => 'This is a very basic calculator',
                  'version' => 'This will tell you the current version of the programme',
@@ -25,7 +27,8 @@ cmd = gets.chomp!
                  '?:' => 'This symbol is indacting that the programme is asking. It is asking you to type in something',
                  ':' => 'This is the normal command prompt. You can just enter an command when you see this',
                  'crt-usr' => "This command will allow you to create a new user. The user will get its own file with the name 'user'.user\nThen close the dos.rb file and open the .rb and the .user files with your name. Please remove everything from the .user file and replace it with your new password. You can now open the .rb file and enter a few commands. Then open the dos.rb again and login",
-                 'login' => "This commands lets you login and start your personal page. You need an account for that. You can create one with crt-usr. After you created it (look for help for crt-usr, please), you can type in login. Type your username and password in and you will be able to see your personal page"
+                 'login' => "This commands lets you login and start your personal page. You need an account for that. You can create one with crt-usr. After you created it (look for help for crt-usr, please), you can type in login. Type your username and password in and you will be able to see your personal page",
+                 'password' => "Generates a random eight character long password"
                  
                 }
                 
@@ -131,6 +134,7 @@ def gen_pw
 end
 
 
+
 #
 
 ##Programmes
@@ -147,9 +151,19 @@ def calculator(num1, num2, operator)
     end
 end
 
-def download(address, site)
+def dl_lx(address, site)
     %x(wget #{address}/#{site})
     puts "Download complete"
+end
+
+def dl_rb(site, file)
+    Net::HTTP.start("#{site}") do |http|
+    resp = http.get("/#{file}")
+    open("#{file}", "wb") do |file|
+        file.write(resp.body)
+    end
+    puts "Download complete"
+end
 end
 
 #- Binary convert programme - binary.rb
@@ -170,7 +184,7 @@ when "clear"
 clear
 
 when "exit"
-puts "Exiting dos.rb"
+orange "Exiting dos.rb"
 
 when "time"
 puts "#{@time.hour + 1}:#{@time.min}:#{@time.sec}"
@@ -187,17 +201,29 @@ num2 = gets.chomp.to_f
 calculator(num1, num2, operator)
 
 when "download"
-print "Address: "
-address = gets.chomp!
-puts
+puts "Which Download method?"
+puts "1.) Use Ruby to download"
+puts "2.) Use Linux to download (wget)"
+print "Select (1,2): "^
+sel = gets.chomp.to_i
 print "Site: "
 site = gets.chomp!
-download(address, site)
+puts
+print "File: "
+file = gets.chomp!
 
+if sel == 1 then
+    dl_lx(site, file)
+end
+
+if sel == 2 then
+    dl_rb(site, file)
+end
 when "rm"
 print "?:"
 delete = gets.chomp!
 deleteFile(delete)
+red("#{delete} has been deleted")
 
 when "version"
 blue(@version)
@@ -229,7 +255,7 @@ pw = pw.delete("\n")
 user.puts(pw)
 orange "Username has been created... Press enter to continue"
 gets
-red("Shutting down\n...")
+red("Shutting down^")
 exit
 
 when "users"
@@ -256,6 +282,8 @@ else
     red("Username does not exist!")
 end
 
+when "password"
+puts gen_pw
 
 
 end
