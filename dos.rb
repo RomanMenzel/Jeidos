@@ -1,8 +1,13 @@
 load 'programmes/binary.rb'
+help = File.open("help.txt", "r+")
 require 'net/http'
 #require 'paint'
 cmd = String.new
-puts "Hello and welcome to JeiDos. Start by typing in 'help"
+if help.read == "no" then
+    puts "Welcome back"
+else
+    puts "Hello and welcome to JeiDos. Start by typing in 'help"
+end
 
 while cmd != "exit"
 
@@ -113,8 +118,7 @@ end
 def login(user, pass)
     value = String.new
     pw = File.open("user/#{user}", "r")
-    value == true if pw.read == pass
-    return true
+    return pw.read == pass
 end
 
 
@@ -285,6 +289,8 @@ end
 when "password"
 puts gen_pw
 
+when ""
+puts "I bet your pardon?"
 
 end
 end
