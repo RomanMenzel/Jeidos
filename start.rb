@@ -1,11 +1,13 @@
-if Dir.exists?('user') then
+load 'pw.rb'
+
+if Dir.exists?('user') == false then
     Dir.mkdir('user')
 end
 
-entrs = Dir.entries(Dir.pwd)
-if entrs.include? ("help.txt") == false then
+if File.exists?("help.txt") == false then
     helpFile = File.new("help.txt", "w+")
     helpFile.puts("yes")
+    helpFile.puts("remove everything from this file and replace it with 'no', if you do not want help with your jeidos")
 end
 
 def detect_users(folder)
