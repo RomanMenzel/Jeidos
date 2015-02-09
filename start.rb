@@ -1,3 +1,7 @@
+if Dir.exists?('user') then
+    Dir.mkdir('user')
+end
+
 def detect_users(folder)
     @accepted = [".user"]
     @user = ""
@@ -31,6 +35,28 @@ def login(user, pass)
     return pw.read == pass
 end
 
+
+puts "1.) Create username"
+puts "2.) Login"
+sel = gets.chomp.to_i
+
+case sel
+when 1
+print "Enter username: "
+@username = gets.chomp!
+pw = gen_pw
+File.new("user/#{@username}.user", "w+")
+user = File.open("user/#{@username}.user", "w+")
+start = File.new("#{@username}.rb", "w+")
+start.puts('puts "Hello :)"')
+pw = pw.delete("\n")
+user.puts(pw)
+puts "Username has been created... Press enter to continue"
+gets
+puts "Shutting down"
+exit
+
+when 2
 print "User:"
 $username = gets.chomp!
 $username = $username + ".user" 
