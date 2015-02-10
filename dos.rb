@@ -291,7 +291,7 @@ when "password"
 puts gen_pw
 
 when ""
-puts "I bet your pardon?"
+puts "I beg your pardon?"
 
 end
 end
