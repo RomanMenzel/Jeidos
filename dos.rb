@@ -1,10 +1,11 @@
 load 'programmes/binary.rb'
+@userInfo = File.open("loggedin.txt", "w+")
 help = File.open("help.txt", "r+")
 require 'net/http'
 #require 'paint'
 cmd = String.new
 if help.read == "no" then
-    puts "Welcome back"
+    puts "Welcome back #{@userInfo.read}"
 else
     puts "Hello and welcome to JeiDos. Start by typing in 'help"
 end
@@ -17,7 +18,7 @@ cmd = gets.chomp!
 # Variables and Methods
 @time = Time.now
 
-@version = "Alpha 0.2\nLast Updated: 09.02.2015"
+@version = "Alpha 0.3\nLast Updated: 10.02.2015"
 
 @commandList = "ls, exit, open, download, time, calc, version, convert, login, password, crt-usr ?:, :"
 @help = {'ls' => 'Lists all the files and folder in your current directory',
