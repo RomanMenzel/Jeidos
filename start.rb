@@ -10,6 +10,10 @@ if File.exists?("help.txt") == false then
     helpFile.puts("remove everything from this file and replace it with 'no', if you do not want help with your jeidos")
 end
 
+if File.exists?("loggedin.txt") == false then
+    File.new("loggedin.txt", "w+")
+end
+
 def detect_users(folder)
     @accepted = [".user"]
     @user = ""
@@ -55,10 +59,10 @@ print "Enter username: "
 pw = gen_pw
 File.new("user/#{@username}.user", "w+")
 user = File.open("user/#{@username}.user", "w+")
-start = File.new("#{@username}.rb", "w+")
-start.puts('puts "Hello :)"')
+userFile = File.new("loggedin.txt", "w+")
 pw = pw.delete("\n")
-user.puts(pw)
+userFile.write "#{@username}"
+user.write "#{pw}"
 puts "Username has been created... Press enter to continue"
 gets
 puts "Shutting down"
@@ -73,6 +77,8 @@ if user_exist?($username) == true then
     $password = gets.chomp!
     if login($username, $password) == true then
         puts "Logging in..."
+        userFile = File.open("loggedin.txt", "w+")
+        userFile.write "#{$username}"
         puts "Logged in as #{$username}"
         puts "Starting dos.rb"
         puts "------"
