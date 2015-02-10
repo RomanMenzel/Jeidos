@@ -15,4 +15,5 @@ I *worked* in the IKT (Informations- und Kommunikationstechnologie / Information
 
 ## Jeidos itself
 Jeidos is the name of this little *operating system*. You can download it (.exe files will be available later) and start it. Just follow the instruction that says `[...] Start by typing in 'help'` and you will be able to get an interactive help menu.
+If you do not want the system to remind you of the help, open the file help.txt and follow the included instructions
 There are already quite a few features, including a little *user management* that you can try out for yourself.
