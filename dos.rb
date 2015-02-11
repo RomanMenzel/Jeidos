@@ -194,7 +194,10 @@ when "exit"
 orange "Exiting dos.rb"
 
 when "time"
-puts "#{@time.hour + 1}:#{@time.min}:#{@time.sec}"
+puts "Winter time: #{@time.hour + 1}:#{@time.min}:#{@time.sec}"
+puts "Summer time: #{@time.hour + 2}:#{@time.min}:#{@time.sec}"
+puts "----"
+puts "Date: #{@time.day}.#{@time.month}.#{@time.year}"
 
 when "calc"
 print "Num1: "
@@ -226,6 +229,7 @@ end
 if sel == 2 then
     dl_rb(site, file)
 end
+
 when "rm"
 print "?:"
 delete = gets.chomp!
@@ -247,7 +251,11 @@ when "help"
 puts @commandList.to_s
 print "Which command or symbol do you need help with: "
 commandHelp = gets.chomp!
-blue(@help[commandHelp])
+if @help.include?(commandHelp) == false then
+    red("There is no help available for this command or symbol. Please contact me via marvinjohanning@yahoo.se")
+else
+    blue(@help[commandHelp])
+end
 
 when "crt-usr"
 blue("--User creation--")
@@ -262,7 +270,7 @@ pw = pw.delete("\n")
 user.puts(pw)
 orange "Username has been created... Press enter to continue"
 gets
-red("Shutting down^")
+red("Shutting down")
 exit
 
 when "users"
@@ -293,7 +301,7 @@ when "password"
 puts gen_pw
 
 when ""
-puts "I bet your pardon?"
+puts "I beg your pardon?"
 
 end
 end
