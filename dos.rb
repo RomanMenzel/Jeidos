@@ -18,9 +18,9 @@ cmd = gets.chomp!
 # Variables and Methods
 @time = Time.now
 
-@version = "Alpha 0.3\nLast Updated: 10.02.2015"
+@version = "Alpha 0.3.5.1\nLast Updated: 11.02.2015"
 
-@commandList = "ls, exit, open, download, time, calc, version, convert, login, password, crt-usr ?:, :"
+@commandList = "ls, exit, open, download, time, calc, version, convert, login, password, crt-usr, users, clear,  ?:, :"
 @help = {'ls' => 'Lists all the files and folder in your current directory',
                  'exit' => 'exits the programme',
                  'rm' => 'Can delete files. Type in rm and you will get a "?:". It is asking you for the file to delete',
@@ -34,7 +34,9 @@ cmd = gets.chomp!
                  ':' => 'This is the normal command prompt. You can just enter an command when you see this',
                  'crt-usr' => "This command will allow you to create a new user. The user will get its own file with the name 'user'.user\nThen close the dos.rb file and open the .rb and the .user files with your name. Please remove everything from the .user file and replace it with your new password. You can now open the .rb file and enter a few commands. Then open the dos.rb again and login",
                  'login' => "This commands lets you login and start your personal page. You need an account for that. You can create one with crt-usr. After you created it (look for help for crt-usr, please), you can type in login. Type your username and password in and you will be able to see your personal page",
-                 'password' => "Generates a random eight character long password"
+                 'password' => "Generates a random eight character long password",
+                 'users' => "This will show you all the registered",
+                 'clear' => "This will clean your screen"
                  
                 }
                 
@@ -209,7 +211,7 @@ when "download"
 puts "Which Download method?"
 puts "1.) Use Ruby to download"
 puts "2.) Use Linux to download (wget)"
-print "Select (1,2): "^
+print "Select (1,2): "
 sel = gets.chomp.to_i
 print "Site: "
 site = gets.chomp!
@@ -291,7 +293,7 @@ when "password"
 puts gen_pw
 
 when ""
-puts "I beg your pardon?"
+puts "I bet your pardon?"
 
 end
 end
