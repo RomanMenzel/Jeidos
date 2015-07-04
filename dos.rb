@@ -70,9 +70,7 @@ def showFiles(folder)
 end
 
 def clear
-    100.times do 
-        puts
-    end
+    system("cls") 
 end
 
 def openFile(file)
