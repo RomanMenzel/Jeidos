@@ -70,7 +70,11 @@ def showFiles(folder)
 end
 
 def clear
-    system("cls") 
+    if RUBY_PLATFORM.include?("linux") # linux
+        system("clear")
+    else
+        system("cls") # windows
+    end
 end
 
 def openFile(file)
